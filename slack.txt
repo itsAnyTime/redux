@@ -1,0 +1,589 @@
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+
+
+
+resources: 
+https://redux.js.org/tutorials/essentials/part-1-overview-concepts
+
+On how to split components into smaller components, see the section “Extracting Components” here: https://reactjs.org/docs/components-and-props.html
+
+https://reactjs.org/docs/thinking-in-react.html
+
+
+https://www.youtube.com/watch?v=35lXWvCuM8o&t=1s
+https://www.youtube.com/watch?v=dMH1_YtUTSQ&t=1517s
+
+1. https://react-redux.js.org/
+2. https://redux.js.org/introduction/getting-started
+3. https://www.valentinog.com/blog/redux/#what-problem-does-redux-solve
+4. https://stackoverflow.com/questions/41963225/redux-subscribe-vs-mapstatetoprops#:~:text=subscribe%20comes%20from%20the%20redux,a%20part%20of%20redux%20itself.&text=You%20can%20then%20access%20the,the%20store%20lifecycle%20via%20store
+
+https://stackoverflow.com/questions/51961135/react-router-switch-and-exact-path
+
+https://www.youtube.com/watch?v=dpw9EHDh2bM
+
+https://reactjs.org/docs/hooks-intro.html
+
+https://stackoverflow.com/questions/48150567/react-router-difference-between-component-and-render#:~:text=4%20Answers&text=When%20you%20use%20component%20prop,time%20the%20route%20is%20rendered
+
+https://medium.com/missive-app/45-faster-react-functional-components-now-3509a668e69f
+
+https://medium.com/better-programming/react-router-whats-the-difference-between-components-and-routes-d242f41b111d
+
+A resource on “the challenging part” of the UserInput/UserOutput assignment:
+https://reactjs.org/docs/lifting-state-up.html
+
+If you don’t know what a React term means, you can look it up here:
+https://reactjs.org/docs/glossary.html
+
+
+Dilshod  14:22 Uhr
+1.    NavLink - https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/NavLink.md
+2.    Router - https://reactrouter.com/web/guides/quick-start
+ReactRouterWebsiteReactRouterWebsite
+React Router: Declarative Routing for React
+Learn once, Route Anywhere (41 kB)
+https://reactrouter.com/react-square.png
+packages/react-router-dom/docs/api/NavLink.md
+# <NavLink>
+
+A special version of the [`<Link>`](Link.md) that will add styling attributes to the rendered element when it matches the current URL.
+
+```jsx
+<NavLink to="/about">About</NavLink>
+## activeClassName: string
+The class to give the element when it is active. The default given class is active. This will be joined with the className prop.
+jsx
+<NavLink to="/faq" activeClassName="selected">
+  FAQs
+</NavLink>
+## activeStyle: object
+The styles to apply to the element when it is active.
+jsx
+<NavLink
+  to="/faq"
+  activeStyle={{
+    fontWeight: "bold",
+    color: "red"
+  }}
+>
+  FAQs
+</NavLink>
+## exact: bool
+When true, the active class/style will only be applied if the location is matched exactly.
+jsx
+<NavLink exact to="/profile">
+  Profile
+</NavLink>
+## strict: bool
+When true, the trailing slash on a location's pathname will be taken into consideration when determining if the location matches the current URL. See the [<Route strict>](../../../react-router/docs/api/Route.md#strict-bool) documentation for more information.
+jsx
+<NavLink strict to="/events/">
+  Events
+</NavLink>
+## isActive: func
+A function to add extra logic for determining whether the link is active. This should be used if you want to do more than verify that the link's pathname matches the current URL's pathname.
+jsx
+<NavLink
+  to="/events/123"
+  isActive={(match, location) => {
+    if (!match) {
+      return false;
+    }
+
+    // only consider an event active if its event id is an odd number
+    const eventID = parseInt(match.params.eventID);
+    return !isNaN(eventID) && eventID % 2 === 1;
+  }}
+>
+  Event 123
+</NavLink>
+## location: object
+The [isActive](#isactive-func) compares the current history location (usually the current browser URL).
+To compare to a different location, a [location](../../../react-router/docs/api/location.md) can be passed.
+## aria-current: string
+The value of the aria-current attribute used on an active link. Available values are:
+- "page" - used to indicate a link within a set of pagination links
+- "step" - used to indicate a link within a step indicator for a step-based process
+- "location" - used to indicate the image that is visually highlighted as the current component of a flow chart
+- "date" - used to indicate the current date within a calendar
+- "time" - used to indicate the current time within a timetable
+- "true" - used to indicate if the NavLink is active
+- "false" - used to prevent assistive technologies from reacting to a current link (a use case would be to prevent multiple aria-current tags on a single page)
+Defaults to "page".
+Based on [WAI-ARIA 1.1 specifications](https://www.w3.org/TR/wai-aria-1.1/#aria-current)
+
+-----------
+
+
+Higher-Order Functions:
+Functions that take functions as arguments or return functions
+
+Dilshod  10:07 Uhr
+<Provider /> makes the Redux store available to any nested components that have been wrapped in the connect() function.
+connect() function connects a React component to a Redux store.
+mapStateToProps()
+It is called every time the store state changes.
+It receives the entire store state, and should return an object of data this component needs.
+
+--------------------------
+
+css:
+App.css
+.App {
+  text-align: center;
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+button {
+margin: 10px;
+padding: 10px;
+background-color: aquamarine;
+color: black;
+border: 2px solid blue;
+border-radius: 10px;
+} 
+
+
+----------------------
+
+
+Dilshod  15:39 Uhr
+Show.js
+import React, {Component} from 'react';
+class Show extends Component {
+    render(){
+        return(
+            <div>
+                <button onClick={this.props.click} style={{margin: '25px'}}>Click me</button>
+                <div id='mydiv' style={{display:'none'}}>
+                    <h1>Readux working!</h1>
+                </div>
+            </div>
+        )
+    }
+}
+export default Show;
+15:39 Uhr
+App.js
+import './App.css';
+import Show from './Show';
+import {createStore} from 'redux';
+const initialState ={
+  buttonClicked: 'no',
+  divVisible: 'no'
+}
+function rootReducer(state=initialState, action){
+  //depending of action type we will change the state accordingly
+  switch(action.type){
+    case "BUTTON_CLICKED":
+      return {...state, buttonClicked: 'yes'};
+    case "DIV_VISIBLE":
+      return {...state, divVisible: 'yes'};
+    default:
+      return state;
+  }    
+}
+const store = createStore(rootReducer);
+function btnClick(){
+  const buttonClickedAction = {
+    type: "BUTTON_CLICKED"
+  }
+  const divVisibleAction = {
+    type: "DIV_VISIBLE"
+  }
+  store.dispatch(buttonClickedAction);
+  store.dispatch(divVisibleAction);
+}
+store.subscribe(function(){
+  if(store.getState().divVisible === 'yes'){
+    const div = document.getElementById('mydiv');
+    div.style.display = 'block';
+  }
+})
+function App() {
+  return (
+    <div className="App">
+      <Show click={btnClick} />
+    </div>
+  );
+}
+export default App;
+
+----------------------
+
+
+Dilshod  13:23 Uhr
+React Route mini project
+App.js
+import './App.css';
+import React, {Component} from 'react';
+import About from './About';
+import Nav from './Nav';
+import Shop from './Shop';
+import ItemDetail from './ItemDetail'
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import './App.css';
+class App extends Component {
+  render() {
+   return (
+     <BrowserRouter>
+     <div className="App">
+       <Nav />
+       <Switch>
+         <Route path='/' exact component={Home} />
+         <Route path='/about' component={About} />
+         <Route path='/shop' exact component={Shop} />
+         <Route path='/shop/:id' component={ItemDetail} />
+       </Switch>
+     </div>
+     </BrowserRouter>
+   );
+ }
+}
+const Home = () => {
+ return (
+   <div>
+     <h1>Home page</h1>
+   </div>
+ )
+}
+export default App;
+Shop.js
+import './App.css';
+import React from 'react';
+import {Link} from 'react-router-dom'
+class Shop extends React.Component {
+   constructor() {
+       super();
+       this.state = { items: ['hi'] };
+     }
+ componentDidMount(){
+   fetch('https://fortnite-api.theapinetwork.com/upcoming/get')
+       .then(res => res.json())
+       .then((result) =>
+           this.setState({
+               items: result
+       }))
+ }
+   render(){
+       //console.log(this.state);
+       if (!this.state.items.data) {
+           return <span>Loading...</span>;
+       }
+   return (
+       <div >
+           {this.state.items.data.map(item => (
+               <h1 key={item.itemId}>
+               <Link to={`/shop/${item.itemId}`}>{item.item.name} </Link></h1>
+           ))}
+       </div>
+     );
+ }
+}
+export default Shop;
+Nav.js
+import './App.css';
+import {Link} from 'react-router-dom'
+function Nav() {
+   const navStyle = {
+       color:"white"
+     }
+ return (
+   <nav>
+       <h3>Logo</h3>
+       <ul className='nav-links'>
+           <Link style={navStyle} to='/about'>
+               <li>About</li>
+           </Link>
+           <Link style={navStyle} to='/shop'>
+               <li>Shop</li>
+           </Link>
+       </ul>
+   </nav>
+ );
+}
+export default Nav;
+ItemDetail.js
+import './App.css';
+import React from 'react';
+class Item extends React.Component {
+   constructor(props) {
+       super(props);
+       this.state = { items: [] };
+      // console.log("This is props: ", props);
+       this.props= props;
+       //console.log("This is props2: ", props);
+     }
+ componentDidMount(){
+   // if (!this.props.match.match) {
+   //    return <span>Loading...</span>;
+   // }
+   console.log(this.props);
+   fetch(`https://fortnite-api.theapinetwork.com/item/get?id=${this.props.match.params.id}`)
+       .then(res => res.json()).then((result) =>
+       this.setState({
+           items: result
+   }))   
+ }
+   render(){
+console.log(this.state.items);
+if (!this.state.items.data) {
+   return <span>Loading...</span>;
+}
+   return (
+       <div >
+           <h2>{this.state.items.data.item.name}</h2>
+           <img src={this.state.items.data.item.images.icon} />    
+       </div>
+     );
+ }
+}
+export default Item;
+
+
+---------------
+
+
+Dilshod  16:40 Uhr
+Installations:
+1.    $npx create-react-app routing
+2.    $npm install react-router-dom
+App.js
+import './App.css';
+import React, {Component} from 'react';
+import './App.css';
+class App extends Component {
+ render() {
+   return (
+     <div className="App">
+       <h1>App</h1>
+     </div>
+   );   
+ }
+}
+export default App;
+ 
+Create files:
+           About.js
+import './App.css';
+function About() {
+ return (
+   <div className="App">
+     <h1>About page</h1>
+   </div>
+ );
+}
+export default About;
+ 
+           Shop.js
+import './App.css';
+function Shop() {
+ return (
+   <div className="App">
+     <h1>Shop page</h1>
+   </div>
+ );
+}
+export default Shop;
+ 
+           Nav.js – navigation
+import './App.css';
+function Nav() {
+ return (
+   <nav>
+       <h3>Logo</h3>
+       <ul className='nav-links'>
+           <li>About</li>
+           <li>Shop</li>
+       </ul>
+   </nav>
+ );
+}
+export default Nav;
+ 
+Import all components to App.js
+import './App.css';
+import React, {Component} from 'react';
+import About from './About';
+import Nav from './Nav';
+import Shop from './Shop'
+import './App.css';
+class App extends Component {
+ render() {
+   return (
+     <div className="App">
+       <Nav />
+       <About />
+       <Shop />       
+     </div>
+   );   
+ }
+}
+export default App;
+ 
+Modify App.css file.
+.App {
+ text-align: center;
+}
+nav{
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ min-height: 10vh;
+ background-color: rgb(73,79,82);
+ color: white
+}
+ 
+Add route to your App.js.
+import './App.css';
+import React, {Component} from 'react';
+import About from './About';
+import Nav from './Nav';
+import Shop from './Shop';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import './App.css';
+class App extends Component {
+ render() {
+   return (
+     <BrowserRouter>
+     <div className="App">
+       <Nav />
+       <Route path='/about' component={About} />
+       <Route path='/shop' component={Shop} />  
+     </div>
+     </BrowserRouter>
+   );
+ }
+}
+export default App;
+
+
+----------
+that is it up from 21.1 to now----
+
+
+
+
+
+
+
+
+
+
+
+cant see stuff before 16.11.2020
+
+here is the last:
+
+https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+MDN Web DocsMDN Web Docs
+Falsy
+A falsy (sometimes written falsey) value is a value that is considered false when encountered in a Boolean context.
+
+https://stackoverflow.com/questions/7148019/when-should-you-use-try-catch-in-javascript
+Stack OverflowStack Overflow
+When should you use try/catch in JavaScript?
+When I'm developing normal web application with JavaScript, the try/catch statement is not needed usually. There's no checked exception, File IO or database connection in JavaScript. Is try/catch
+10:01 Uhr
+https://softwareengineering.stackexchange.com/questions/144326/try-catch-in-javascript-isnt-it-a-good-practice
+Software Engineering Stack ExchangeSoftware Engineering Stack Exchange
+try-catch in javascript... isn't it a good practice?
+There is a provision for try-catch block in javascript. While in java or any other language it is mandatory to have error handling, I don't see anybody using them in javascript for greater extent. ...
+
+
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+Execution of the current function will stop (the statements after throw won’t be executed) (bearbeitet) 
+Screenshot 2020-11-19 at 10.12.46.png 
+
+
+
+https://stackify.com/node-js-error-handling/
+StackifyStackify
+Node.js Error Handling Best Practices: Ship With Confidence
+Get best practices on how to handle errors in Node.js so you can feel more comfortable with throwing error objects and catching them in either synchronous or asynchronous code.
+28. Nov. 2018
+:+1:
+1
+
+
+Dilshod  10:42 Uhr
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
+MDN Web DocsMDN Web Docs
+Control flow and error handling
+JavaScript supports a compact set of statements, specifically control flow statements, that you can use to incorporate a great deal of interactivity in your application. This chapter provides an overview of these statements.
+:+1:
+1
+
+
+Mo  15:43 Uhr
+https://www.youtube.com/watch?v=cFTFtuEQ-10
+YouTubeYouTube | freeCodeCamp.org
+try, catch, finally, throw - error handling in JavaScript 
+
+:+1:
+3
+
+
+Dilshod  17:05 Uhr
+Run this code and see the results:
+console.log("hello1");
+console.log("hello2");
+console.log(hello3); // Error
+console.log("hello5");
+console.log("hello6");
+Where are my “hello5” and “hello6" results? (bearbeitet) 
+:augen:
+2
+:+1::hautton-2:
+3
+
+17:06 Uhr
+And look at this:
+console.log("hello1");
+console.log("hello2");
+try {
+    console.log(hello3);
+} catch (error) {
+    console.log("");
+}
+console.log("hello5");
+console.log("hello6");
+:augen:
+2
+:nachdenkliches_gesicht:
+1
+:+1::hautton-2:
+3
+
+
+Gerhard Nuffer  09:51 Uhr
+Resources for the Guessing Game Assignment
+https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+MDN Web DocsMDN Web Docs
+Window.alert()
+The Window.alert() method displays an alert dialog with the optional specified content and an OK button.
+MDN Web DocsMDN Web Docs
+Window.prompt()
+The Window.prompt() displays a dialog with an optional message prompting the user to input some text.
+MDN Web DocsMDN Web Docs
+Math.random()
+The Math.random() function returns a floating-point, pseudo-random number in the range 0 to less than 1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range. The implementation selects the initial seed to the random number generation algorithm; it cannot be chosen or reset by the user.
+:+1:
+3
+
+09:53 Uhr
+Resource for the next weeks:
+https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
+MDN Web DocsMDN Web Docs
+Introduction to the DOM
+The Document Object Model (DOM) is the data representation of the objects that comprise the structure and content of a document on the web. In this guide, we'll briefly introduce the DOM.

@@ -1,0 +1,51 @@
+import React,{useState, useEffect} from 'react';
+import './App.css';
+
+// task
+//Checking Account App Refactored
+
+// 1. Write a functional component consisting of an h1 element that displays your current account balance, and 2 input fields with buttons, one for deposits (adding money to the account) and one for withdrawals (subtracting money from the account).  (This can also be done without buttons; I'll leave it up to you how exactly you want to implement this.) 
+
+// 2. Use the useEffect hook (i) to retrieve the balance from localStorage once the App component is mounted, and (ii) to store the balance in localStorage when the balance changes.
+
+function App() {
+  const [balance, setBalance] = useState(localStorage.getItem('balance'));
+  const [depositStr, setDepositStr] = useState('');
+  const [withdrawalStr, setWithdrawalStr] = useState('');
+    useEffect (() => {
+    const storedBalance = localStorage.getItem('balance');
+      window.addEventListener('beforeunload', () => {
+          localStorage.setItem('balance', balance);
+      });
+    },[balance]) 
+    function updateDepositStr(event) {  
+            setDepositStr(event.target.value)   
+    }
+    function updateWithdrawalStr(event){   
+            setWithdrawalStr(event.target.value)  
+    }
+    function deposit() { 
+            setBalance(Number(balance) + Number(depositStr))
+            setDepositStr('')
+            localStorage.setItem('balance', balance);
+    }
+    function withdraw() {
+            setBalance(Number(balance) - Number(withdrawalStr))
+            setWithdrawalStr('')
+            localStorage.setItem('balance', balance);
+    }
+        return (
+            <div>
+                <h1>Your current balance is {balance} Dollars</h1>
+                <div>
+                    <input onChange={updateDepositStr} value={depositStr} />
+                    <button onClick={deposit}>Deposit</button>
+                </div>
+                <div>
+                    <input onChange={updateWithdrawalStr} value={withdrawalStr} />
+                    <button onClick={withdraw}>Withdraw</button>
+                </div>
+            </div>
+        );
+}
+export default App;

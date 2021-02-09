@@ -1,0 +1,156 @@
+from Marika:
+
+for the app.js
+--------------
+import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.css'; 
+// not only npm install bootstraps allso import it
+import {connect} from 'react-redux'
+import X from './Component'
+import Y from './ComponentY'
+class App extends React.Component{
+  incrementX = () =>{
+    this.props.dispatch({ type: 'INCEMENT_X'})
+  }
+  incrementY = () =>{
+    this.props.dispatch({ type: 'INCEMENT_Y'})
+  }
+  render (){
+    return(
+      <div>
+      <X countX={this.props.count} incrementX={this.incrementX}/>
+      <Y count1Y={this.props.count1} incrementY={this.incrementY}/>
+      </div>
+    )
+  };
+}
+function mapStateToProps(state){
+  return{
+    count: state.count,
+    count1: state.count1
+  }
+}
+export default connect(mapStateToProps)(App);
+// render (){
+//   return(
+//     <div>
+//       <div class="alert alert-success container-sm mt-5" role="alert">B,x =
+//         <strong>{this.props.count}</strong> 
+//       </div>
+//       <button onClick={this.incrementX}class="btn btn-outline-danger">Increment Y</button>
+//       <div class="alert alert-success container-sm mt-5" role="alert">C,y =
+//         <strong>{this.props.count1}</strong> 
+//       </div>
+//       <button onClick={this.incrementY}class="btn btn-outline-info">Increment X</button>
+//     </div>
+//   )
+// };
+
+
+for index.js
+-------------------
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import{Provider} from 'react-redux';
+import{createStore} from 'redux'
+import App from './App';
+import reducer from './Reducer'
+
+//  const initialState ={
+//    count: 0,
+//    count1: 0
+//  }
+//  function reducer (state= initialState, action) {
+//    switch (action.type) {
+//      case 'INCEMENT_X':
+//        return { 
+//          count: state.count +10,
+//          count1: state.count1 
+//        }
+//     case 'INCEMENT_Y':
+//       return { 
+//         count: state.count, 
+//         count1: state.count1 +13
+//       }  
+//      default:
+//        return state;
+//    }
+//  }
+// 
+//try to type: {...state, count1: state.count1 + 1} 
+
+const store = createStore(reducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+
+for the Reducer.js
+--------------------
+const initialState ={
+    count: 0,
+    count1: 0
+  }
+  function reducer (state= initialState, action) {
+    switch (action.type) {
+      case 'INCEMENT_X':
+        return { 
+          count: state.count +10,
+          count1: state.count1 
+         // ...state, count1 : state.count + 10
+        }
+     case 'INCEMENT_Y':
+       return { 
+         count: state.count, 
+         count1: state.count1 +13
+       }  
+      default:
+        return state;
+    }
+  }
+  export default reducer
+
+
+
+the componentx.js
+--------------------
+
+function X (props){
+return(
+    <div>
+      <div class="alert alert-success container-sm mt-5" role="alert">B,x =
+        <strong>{props.countX}</strong> 
+      </div>
+      <button onClick={props.incrementX} class="btn btn-outline-danger">Increment Y</button>
+    </div>
+  )
+}
+export default X
+
+
+
+the component y
+----------------
+function Y (props){
+    return(
+<div>
+<div class="alert alert-success container-sm mt-5" role="alert">C,y =
+<strong>{props.count1Y}</strong> 
+</div>
+<button onClick={props.incrementY}class="btn btn-outline-info">Increment X</button>
+</div>
+  )
+}
+export default Y
+
+
+--------------
+  <X countX={this.props.count1} incrementX={this.incrementX}/>
+      <Y count1Y={this.props.count} incrementY={this.incrementY}/>
+
+hier habe ich nur die nummer im count geändert damit das obere das untere macht
